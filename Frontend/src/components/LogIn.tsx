@@ -1,30 +1,54 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 export function LogIn() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate()
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+
+ 
+  async function login() {
+    try {
+      const res = await axios.post("http://localhost:10000/api/v1/user/login", {
+        email: email,
+        password: password,
+      });
+      return res;
+    } catch (error) {
+      console.error("Error during login:", error);
+      throw error; // Rethrow the error so it can be handled by the caller if necessary
+    }
+  }
+
+  const handleLogin = async () => {
+    console.log("handle login");
+
+    const result = await login();
+    console.log(result.data.token);
+    if (result.status === 200) {
+      navigate('/')
+    }
+  };
+
   return (
     <section className="rounded-md h-screen  p-2 text-white">
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
           <h2 className="text-2xl font-bold leading-tight text-white">
             {" "}
-            {loggedIn ? "Log in" : "Sign in"} to your account
+            Sign In
           </h2>
           <p
             className="mt-2text-sm text-gray-600 "
-            onClick={() => setLoggedIn(!loggedIn)}
           >
             Don&apos;t have an account?{" "}
-            <a
-              href="#"
-              title=""
+            <Link
+              to="/signup"
               className="font-semibold text-white transition-all duration-200 hover:underline"
             >
               Create a free account
-            </a>
+            </Link>
           </p>
           <form action="#" method="POST" className="mt-8">
             <div className="space-y-5">
@@ -72,13 +96,13 @@ export function LogIn() {
                 </div>
               </div>
               <div>
-                <button
-                  type="button"
-                  className="inline-flex w-full border items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-                >
-                  {loggedIn ? "Log in" : "Sign Up"}{" "}
-                  <ArrowRight className="ml-2" size={16} />
-                </button>
+                  <button
+                    type="button"
+                    className="inline-flex w-full border items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                    onClick={handleLogin}
+                  >
+                    Log In <ArrowRight className="ml-2" size={16} />
+                  </button>
               </div>
             </div>
           </form>

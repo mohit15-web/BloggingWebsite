@@ -1,10 +1,12 @@
+import ListBlogs from "./ListBlogs";
 import { BackgroundBeams } from "./ui/Background-beams";
 
 export function Home() {
   return (
-    <div className="h-screen w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
+   <>
+    <div className="h-[100dvh] rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
       <div className="max-w-2xl mx-auto p-4">
-        <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold text-gray-400 ">
+        <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold text-gray-500 ">
           Create a Blog
         </h1>
         <p></p>
@@ -15,13 +17,12 @@ export function Home() {
           password reset emails, or promotional campaigns, MailJet has got you
           covered.
         </p>
-        <input
-          type="text"
-          placeholder="hi@manuarora.in"
-          className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10 mt-4  bg-neutral-950 placeholder:text-neutral-700"
-        />
+       
       </div>
       <BackgroundBeams />
+      
     </div>
+    <ListBlogs/>
+   </>
   );
 }

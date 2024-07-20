@@ -15,7 +15,8 @@ export function Navbar() {
   return (
     <div className="relative w-full py-5 text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
-        <div className="inline-flex items-center space-x-2">
+       <Link to={"/"}>
+       <div className="inline-flex items-center space-x-2">
           <span>
             <svg
               width="30"
@@ -32,6 +33,7 @@ export function Navbar() {
           </span>
           <span className="font-bold">Blogs</span>
         </div>
+       </Link>
        
         <div className="hidden space-x-2 lg:block">
          <Link to="/login">

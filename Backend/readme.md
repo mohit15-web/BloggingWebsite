@@ -19,3 +19,5 @@
   "email":"mohit@gmail.com",
     "password":"mohit123",   
 }
+
+- https://bloggingwebsite-og5a.onrender.com/api/v1/user/signup

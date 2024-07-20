@@ -15,8 +15,24 @@ const createPost = async (req, res) => {
   }
 };
 
+const listPost = async (req, res) => {
+  try {
+    let list = await Post.find();
+    res.json({
+      success: true,
+      list,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 const postController = {
   createPost,
+  listPost
 };
 
 module.exports = postController;
