@@ -9,6 +9,7 @@ const authMiddleware = async (req, res, next) => {
    * 3. If the token is expired
    * 4. User details validation
    */
+  console.log(req.headers.authorization);
 
   try {
     const bearerToken = req.headers.authorization;
@@ -24,6 +25,7 @@ const authMiddleware = async (req, res, next) => {
 
     const tokenData = jwt.decode(token);
 
+    console.log(tokenData);
     const currentTimeInSeconds = Math.floor(new Date().getTime() / 1000);
 
     if (currentTimeInSeconds > tokenData.exp) {
@@ -34,7 +36,7 @@ const authMiddleware = async (req, res, next) => {
       });
     }
 
-    const user = await UserModel.findById(tokenData.userId);
+    const user = await UserModel.findById(tokenData.id);
     if (!user) {
       return res.status(401).json({
         success: false,

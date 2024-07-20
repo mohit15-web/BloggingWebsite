@@ -3,14 +3,15 @@ const mongoose = require("mongoose");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
 const app = express();
-
+const dotenv = require("dotenv");
+dotenv.config();
 app.use(express.json());
 
 app.use("/api/v1/user/", userRouter);
 app.use("/post", postRouter);
 
 mongoose
-  .connect("mongodb://localhost:27017/Blogs")
+  .connect(process.env.MONGO_SERVER)
   .then(() => {
     console.log("Database connected");
   })
