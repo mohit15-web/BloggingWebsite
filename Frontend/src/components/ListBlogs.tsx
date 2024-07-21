@@ -16,7 +16,7 @@ function ListBlogs() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:10000/post/list");
+        const response = await axios.get("https://bloggingwebsite-og5a.onrender.com/post/list");
         console.log(response);
         setBlogs(response.data.list);
       } catch (error) {
