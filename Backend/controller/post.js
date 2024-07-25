@@ -30,9 +30,43 @@ const listPost = async (req, res) => {
   }
 };
 
+const editPost = async(req,res) => {
+  let id = req.params.postId
+  try {
+    let updateData = await Post.findByIdAndUpdate(id,req.body)
+    res.json({
+      success:true,
+      message:"post edited successfully"
+    })
+  } catch (error) {
+    res.status(403).json({
+      success:false,
+      message:error
+    })
+  }
+}
+
+const deletePost = async(req,res) => {
+  let id = req.params.postId
+  try {
+    let updateData = await Post.findByIdAndDelete(id)
+    res.json({
+      success:true,
+      message:"post deleted successfully"
+    })
+  } catch (error) {
+    res.status(403).json({
+      success:false,
+      message:error
+    })
+  }
+}
+
 const postController = {
   createPost,
-  listPost
+  listPost,
+  editPost,
+  deletePost
 };
 
 module.exports = postController;
